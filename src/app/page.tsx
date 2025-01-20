@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowRight, Brain, Book, Video, Sparkles, Award, ChevronRight, Github, Linkedin, Twitter, Star, CheckCircle, Users, MessageSquare, PenTool, Target } from 'lucide-react';
+import Image from 'next/image';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -140,13 +141,13 @@ export default function Home() {
             </motion.div>
             <motion.h1
               variants={fadeIn}
-              className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+              className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
             >
               Master Math with AI Intelligence
             </motion.h1>
             <motion.p
               variants={fadeIn}
-              className="text-xl text-gray-600 mb-8"
+              className="text-xl text-gray-600 mb-8 mt-8"
             >
               Experience personalized learning with our advanced AI tutor that breaks down complex math problems into simple, understandable steps.
             </motion.p>
@@ -318,7 +319,7 @@ export default function Home() {
                 className="bg-white p-8 rounded-2xl shadow-lg"
               >
                 <div className="flex items-center mb-6">
-                  <img src={review.image} alt={review.name} className="w-16 h-16 rounded-full" />
+                  <Image src={review.image} alt={review.name} width={50} height={50} className="w-16 h-16 rounded-full" />
                   <div className="ml-4">
                     <h3 className="font-semibold text-lg">{review.name}</h3>
                     <p className="text-gray-600">{review.role}</p>
@@ -347,7 +348,7 @@ export default function Home() {
             className="text-center max-w-2xl mx-auto mb-16"
           >
             <h2 className="text-4xl font-bold mb-4">Comprehensive Math Coverage</h2>
-            <p className="text-gray-600">From basic arithmetic to advanced calculus, we've got you covered</p>
+            <p className="text-gray-600">From basic arithmetic to advanced calculus, we&apos;ve got you covered</p>
           </motion.div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
