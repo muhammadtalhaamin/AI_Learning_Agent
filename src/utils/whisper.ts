@@ -1,24 +1,19 @@
-import OpenAI from 'openai';
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-export async function transcribeAudio(audioBase64: string): Promise<string> {
+export async function transcribeAudio(base64Audio: string): Promise<string> {
   try {
-    // Convert base64 to Buffer
-    const audioBuffer = Buffer.from(audioBase64, 'base64');
-
-    // Create a Blob from the buffer
-    const blob = new Blob([audioBuffer], { type: 'audio/webm' });
-    const file = new File([blob], 'audio.webm', { type: 'audio/webm' });
-
-    const transcription = await openai.audio.transcriptions.create({
-      file: file,
-      model: 'whisper-1',
+    const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        file: base64Audio,
+        model: 'whisper-1'
+      }),
     });
 
-    return transcription.text;
+    const data = await response.json();
+    return data.text;
   } catch (error) {
     console.error('Error transcribing audio:', error);
     throw error;

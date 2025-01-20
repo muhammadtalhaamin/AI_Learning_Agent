@@ -123,7 +123,7 @@ export default function AudioControls({ onAudioData }: AudioControlsProps) {
   }, [audioState]);
 
   return (
-    <div className="flex gap-4 my-4">
+    <div className="flex justify-center gap-4 my-4">
       <button
         onClick={startRecording}
         disabled={audioState.isRecording}
@@ -133,7 +133,7 @@ export default function AudioControls({ onAudioData }: AudioControlsProps) {
             : 'bg-blue-500 hover:bg-blue-600'
         } text-white`}
       >
-        Start Recording
+        Start Speaking
       </button>
       <button
         onClick={stopRecording}
@@ -144,7 +144,7 @@ export default function AudioControls({ onAudioData }: AudioControlsProps) {
             : 'bg-red-500 hover:bg-red-600'
         } text-white`}
       >
-        Stop Recording
+        Stop Speaking
       </button>
     </div>
   );

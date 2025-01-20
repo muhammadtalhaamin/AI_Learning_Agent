@@ -1,13 +1,15 @@
-// 2. next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    webpack: (config) => {
-      config.externals.push({
-        'utf-8-validate': 'commonjs utf-8-validate',
-        'bufferutil': 'commonjs bufferutil',
-      });
-      return config;
-    },
-  };
-  
-  export default nextConfig;
+  webpack: (config) => {
+    config.externals.push({
+      'utf-8-validate': 'commonjs utf-8-validate',
+      'bufferutil': 'commonjs bufferutil',
+    });
+    return config;
+  },
+  images: {
+    domains: ['metaschool.so'], // Add the domain(s) you want to allow
+  },
+};
+
+export default nextConfig;
