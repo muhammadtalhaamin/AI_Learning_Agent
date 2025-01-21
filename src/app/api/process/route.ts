@@ -66,6 +66,7 @@ export async function POST(req: NextRequest) {
 
         Remember to:
         - Automatically proceed to the next step after user confirmation.
+        - Display the output properly formated and avoid showing '** **' around steps.
         - Solve the problem step by step without asking for unnecessary confirmations.
         - Keep the conversation natural and engaging.
         - Focus on the current step without jumping ahead.

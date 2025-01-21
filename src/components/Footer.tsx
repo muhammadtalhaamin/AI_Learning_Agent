@@ -21,7 +21,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="mt-188px w-full">
+    <footer className="w-full bg-white shadow-md dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 py-5">
         <div className="flex justify-between items-start">
           {/* Left side */}

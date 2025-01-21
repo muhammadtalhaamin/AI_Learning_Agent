@@ -260,7 +260,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden bg-gray-50 dark:bg-gray-900">
+    <div className="flex-1 flex flex-col overflow-hidden bg-gray-50 dark:bg-gray-900">
       {/* Header */}
       <header className="h-16 bg-white shadow-md dark:bg-gray-800">
         <div className="container mx-auto px-6 h-full">
