@@ -1,4 +1,4 @@
-# AI Personal Agent
+# AI Math Agent
 AI Math Agent is your cutting-edge virtual tutor designed to enhance your math learning experience. Powered by advanced AI, it offers step-by-step solutions, personalized learning, and comprehensive coverage of various math topics. 
 
 Built with Next.js and modern technologies, AI Math Agent delivers a seamless and interactive experience, making math learning more accessible and intuitive for everyone.
