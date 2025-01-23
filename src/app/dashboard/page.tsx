@@ -4,6 +4,10 @@ import { useRef, useState, useEffect } from 'react';
 import { Brain, Upload, Trash2, Settings, MessageSquare, Palette, Save, Volume2, Moon, Sun, Languages, User } from 'lucide-react';
 import AudioControls from '@/components/AudioControls';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import 'katex/dist/katex.min.css';
 
 interface Message {
   type: 'user' | 'assistant';
@@ -259,6 +263,44 @@ export default function Dashboard() {
     setAudioEnabled(!audioEnabled);
   };
 
+    // Updated message rendering to use ReactMarkdown for better formatting
+    const renderMessageContent = (message: Message) => {
+      return (
+        <ReactMarkdown
+          remarkPlugins={[remarkMath]}
+          rehypePlugins={[rehypeKatex]}
+          components={{
+            p: ({node, ...props}) => (
+              <p className="mb-2 leading-relaxed" {...props} />
+            ),
+            h1: ({node, ...props}) => (
+              <h1 className="text-xl font-bold text-blue-700 dark:text-blue-400 mb-2" {...props} />
+            ),
+            h2: ({node, ...props}) => (
+              <h2 className="text-lg font-semibold text-blue-600 dark:text-blue-500 mb-1" {...props} />
+            ),
+            code: ({node, ...props}) => (
+              <code 
+                className="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded-md text-sm" 
+                {...props} 
+              />
+            ),
+            pre: ({node, ...props}) => (
+              <pre 
+                className="bg-gray-50 dark:bg-gray-800 p-3 rounded-md overflow-x-auto text-sm mb-2" 
+                {...props} 
+              />
+            )
+          }}
+        >
+          {message.text}
+        </ReactMarkdown>
+      );
+    };
+  
+
+
+
   return (
     <div className="flex-1 flex flex-col overflow-hidden bg-gray-50 dark:bg-gray-900">
       {/* Header */}
@@ -445,32 +487,36 @@ export default function Dashboard() {
             </div>
             
             {/* Messages Container */}
-            <div className="flex-1 overflow-y-auto p-4">
-              <div className="space-y-4">
-                {messages.map((message, index) => (
-                  <div
-                    key={index}
-                    className={`p-4 rounded-lg ${
-                      message.type === 'assistant'
-                        ? 'bg-blue-50 ml-4 dark:bg-blue-900'
-                        : 'bg-gray-50 mr-4 dark:bg-gray-700'
-                    }`}
-                  >
-                    <p className="text-gray-700 dark:text-gray-300">
-                      {message.text}
-                      {message.isTyping && (
-                        <span className="inline-block w-2 h-4 ml-1 bg-gray-400 animate-pulse dark:bg-gray-500" />
-                      )}
-                    </p>
-                  </div>
-                ))}
-                {isProcessing && !isPlaying && (
-                  <div className="flex items-center justify-center p-4 text-gray-500 dark:text-gray-400">
-                    <div className="animate-pulse">Processing your request...</div>
-                  </div>
+             {/* Messages Container */}
+      <div className="flex-1 overflow-y-auto p-4">
+        <div className="space-y-4">
+          {messages.map((message, index) => (
+            <div
+              key={index}
+              className={`p-4 rounded-lg ${
+                message.type === 'assistant'
+                  ? 'bg-blue-50 ml-4 dark:bg-blue-900'
+                  : 'bg-gray-50 mr-4 dark:bg-gray-700'
+              }`}
+            >
+              <div className={`
+                text-gray-700 dark:text-gray-300 
+                ${message.type === 'assistant' ? 'font-medium' : ''}
+              `}>
+                {renderMessageContent(message)}
+                {message.isTyping && (
+                  <span className="inline-block w-2 h-4 ml-1 bg-gray-400 animate-pulse dark:bg-gray-500" />
                 )}
               </div>
             </div>
+          ))}
+          {isProcessing && !isPlaying && (
+            <div className="flex items-center justify-center p-4 text-gray-500 dark:text-gray-400">
+              <div className="animate-pulse">Processing your request...</div>
+            </div>
+          )}
+        </div>
+      </div>
           </div>
         </div>
       </div>
